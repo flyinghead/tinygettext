@@ -71,13 +71,13 @@ Dictionary::get_plural_forms() const
   return plural_forms;
 }
 
-std::string
+const std::string&
 Dictionary::translate_plural(const std::string& msgid, const std::string& msgid_plural, int num) const
 {
   return translate_plural(entries, msgid, msgid_plural, num);
 }
 
-std::string
+const std::string&
 Dictionary::translate_plural(const Entries& dict, const std::string& msgid, const std::string& msgid_plural, int count) const
 {
   Entries::const_iterator it = dict.find(msgid);
@@ -114,13 +114,13 @@ Dictionary::translate_plural(const Entries& dict, const std::string& msgid, cons
   }
 }
 
-std::string
+const std::string&
 Dictionary::translate(const std::string& msgid) const
 {
   return translate(entries, msgid);
 }
 
-std::string
+const std::string&
 Dictionary::translate(const Entries& dict, const std::string& msgid) const
 {
   Entries::const_iterator i = dict.find(msgid);
@@ -137,7 +137,7 @@ Dictionary::translate(const Entries& dict, const std::string& msgid) const
   }
 }
 
-std::string
+const std::string&
 Dictionary::translate_ctxt(const std::string& msgctxt, const std::string& msgid) const
 {
   CtxtEntries::const_iterator i = ctxt_entries.find(msgctxt);
@@ -152,7 +152,7 @@ Dictionary::translate_ctxt(const std::string& msgctxt, const std::string& msgid)
   }
 }
 
-std::string
+const std::string&
 Dictionary::translate_ctxt_plural(const std::string& msgctxt,
                                   const std::string& msgid, const std::string& msgidplural, int num) const
 {
