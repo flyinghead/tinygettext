@@ -18,7 +18,7 @@
 // 3. This notice may not be removed or altered from any source distribution.
 
 // Flyinghead:
-// Added TINYTEXT_WO_ICONV to disable iconv completely
+// Added TINYGETTEXT_WO_ICONV to disable iconv completely
 #ifndef HEADER_TINYGETTEXT_ICONV_HPP
 #define HEADER_TINYGETTEXT_ICONV_HPP
 
@@ -26,7 +26,7 @@
 
 #ifdef TINYGETTEXT_WITH_SDL
 #  include "SDL.h"
-#elif !defined(TINYTEXT_WO_ICONV)
+#elif !defined(TINYGETTEXT_WO_ICONV)
 #  include <iconv.h>
 #else
 #  include "tinygettext/log_stream.hpp"
@@ -47,7 +47,7 @@ struct ConstPtrHack {
 
 #ifdef TINYGETTEXT_WITH_SDL
 using iconv_t = ::SDL_iconv_t;
-#elif !defined(TINYTEXT_WO_ICONV)
+#elif !defined(TINYGETTEXT_WO_ICONV)
 using iconv_t = ::iconv_t;
 #else
 using iconv_t = void *;
@@ -57,7 +57,7 @@ inline iconv_t iconv_open(const char* tocode, const char* fromcode)
 {
 #ifdef TINYGETTEXT_WITH_SDL
   return SDL_iconv_open(tocode, fromcode);
-#elif !defined(TINYTEXT_WO_ICONV)
+#elif !defined(TINYGETTEXT_WO_ICONV)
   return ::iconv_open(tocode, fromcode);
 #else
   if (strcmp(tocode, fromcode) != 0) {
@@ -73,7 +73,7 @@ inline size_t iconv(iconv_t cd,
 {
 #ifdef TINYGETTEXT_WITH_SDL
   return SDL_iconv(cd, inbuf, inbytesleft, outbuf, outbytesleft);
-#elif !defined(TINYTEXT_WO_ICONV)
+#elif !defined(TINYGETTEXT_WO_ICONV)
   return ::iconv(cd, detail::ConstPtrHack(inbuf), inbytesleft, outbuf, outbytesleft);
 #else
   // not called
@@ -85,7 +85,7 @@ inline int iconv_close(iconv_t cd)
 {
 #ifdef TINYGETTEXT_WITH_SDL
   return SDL_iconv_close(cd);
-#elif !defined(TINYTEXT_WO_ICONV)
+#elif !defined(TINYGETTEXT_WO_ICONV)
   return ::iconv_close(cd);
 #else
   return 0;
